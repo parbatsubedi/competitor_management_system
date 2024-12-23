@@ -1,11 +1,13 @@
 package com.competitorManagement.entity;
 
+import java.util.Arrays;
+
 public class Competitor {
     private int competitorID;
     private Name name;
-    private String level; // Beginner, Intermediate, Advanced
-    private String country; // Extra attribute
-    private int[] scores; // Array of scores
+    private String level;
+    private String country;
+    private int[] scores;
 
     public Competitor(int competitorID, Name name, String level, String country, int[] scores) {
         this.competitorID = competitorID;
@@ -15,68 +17,25 @@ public class Competitor {
         this.scores = scores;
     }
 
-    public int getCompetitorID() {
-        return competitorID;
-    }
-
-    public void setCompetitorID(int competitorID) {
-        this.competitorID = competitorID;
-    }
-
-    public Name getName() {
-        return name;
-    }
-
-    public void setName(Name name) {
-        this.name = name;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public int[] getScores() {
-        return scores;
-    }
-
-    public void setScores(int[] scores) {
-        this.scores = scores;
-    }
+    // Getters
+    public int getCompetitorID() { return competitorID; }
+    public Name getName() { return name; }
+    public String getLevel() { return level; }
+    public String getCountry() { return country; }
+    public int[] getScores() { return scores; }
 
     public double getOverallScore() {
-        if (scores == null || scores.length == 0) return 0;
-
-        // Calculate average excluding highest and lowest scores
-        int total = 0, max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
-
-        for (int score : scores) {
-            total += score;
-            if (score > max) max = score;
-            if (score < min) min = score;
-        }
-
-        total -= (max + min);
-        return scores.length > 2 ? (double) total / (scores.length - 2) : (double) total / scores.length;
-    }
-
-    public String getFullDetails() {
-        return "Competitor number " + competitorID + ", name " + name + ", country " + country + ".\n" +
-                name.getFirstName() + " is a " + level + " and has an overall score of " + getOverallScore() + ".";
+        return Arrays.stream(scores).average().orElse(0.0);
     }
 
     public String getShortDetails() {
-        return "CN " + competitorID + " (" + name.getInitials() + ") has overall score " + getOverallScore() + ".";
+        return String.format("ID: %d, Name: %s %s, Level: %s",
+                competitorID, name.getFirstName(), name.getLastName(), level);
+    }
+
+    public String getFullDetails() {
+        return String.format("%d\t%s %s\t%s\t%s\t%s\t%.1f",
+                competitorID, name.getFirstName(), name.getLastName(), level, country,
+                Arrays.toString(scores), getOverallScore());
     }
 }
