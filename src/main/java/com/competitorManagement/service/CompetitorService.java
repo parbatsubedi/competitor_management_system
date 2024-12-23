@@ -22,6 +22,10 @@ public class CompetitorService {
         return repository.findById(id);
     }
 
+    public List<Competitor> getAllCompetitors() {
+        return repository.findAll();
+    }
+
     public void generateReport() {
         List<Competitor> competitors = repository.findAll();
 
@@ -53,11 +57,11 @@ public class CompetitorService {
         if (scores.length != 5) {
             throw new IllegalArgumentException("Must have exactly 5 scores");
         }
+    }
         //Validate scores range from user input
 //        for (int score : scores) {
 //            if (score < 0 || score > 5) {
 //                throw new IllegalArgumentException("Scores must be between 0 and 5");
 //            }
 //        }
-    }
 }
