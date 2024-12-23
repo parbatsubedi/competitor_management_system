@@ -1,17 +1,28 @@
-package org.competitorManagement;
+package com.competitorManagement;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import com.competitorManagement.entity.Competitor;
+import com.competitorManagement.entity.Name;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Name name1 = new Name("Alice", "Green");
+        Competitor competitor1 = new Competitor(200, name1, "Beginner", "USA");
+
+        Name name2 = new Name("Bob", "Brown");
+        Competitor competitor2 = new Competitor(201, name2, "Intermediate", "Canada");
+
+        //Display Input datas in console
+        System.out.println("Input Data:");
+        System.out.println("Competitor 1: ID=" + competitor1.getCompetitorID() + ", Name=" + competitor1.getName() + ", Level=" + competitor1.getLevel() + ", Country=" + competitor1.getCountry());
+        System.out.println("Competitor 2: ID=" + competitor2.getCompetitorID() + ", Name=" + competitor2.getName() + ", Level=" + competitor2.getLevel() + ", Country=" + competitor2.getCountry());
+
+        // Display Results
+        System.out.println("\nResults:");
+        System.out.println(competitor1.getFullDetails());
+        System.out.println(competitor1.getShortDetails());
+
+        System.out.println(competitor2.getFullDetails());
+        System.out.println(competitor2.getShortDetails());
     }
 }
